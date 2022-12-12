@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "934491042956",
+    "project_id": "networkinglab18604",
+    "storage_bucket": "networkinglab18604.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934491042956:android:e8a5d11ddfcffddfe8b7a9",
+        "android_client_info": {
+          "package_name": "pham.hien.moto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934491042956-5jf7ivdn5fs0qk8q6qqbjq025qmj68s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDshYwEXQWDkoVL-DBjOpJjFIkJAs_yem0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934491042956-5jf7ivdn5fs0qk8q6qqbjq025qmj68s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934491042956:android:9c960080f1a07ffae8b7a9",
+        "android_client_info": {
+          "package_name": "pham.hien.networkinglab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934491042956-hd1krl00ddgamnp0qeri783t42e868v3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pham.hien.networkinglab",
+            "certificate_hash": "87af5ffc140e8237d6fca710869a63d39d8721c3"
+          }
+        },
+        {
+          "client_id": "934491042956-5jf7ivdn5fs0qk8q6qqbjq025qmj68s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDshYwEXQWDkoVL-DBjOpJjFIkJAs_yem0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934491042956-5jf7ivdn5fs0qk8q6qqbjq025qmj68s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934491042956:android:7bfbe73ce6fcb62be8b7a9",
+        "android_client_info": {
+          "package_name": "pham.hien.thi_13_ph18604"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934491042956-5jf7ivdn5fs0qk8q6qqbjq025qmj68s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDshYwEXQWDkoVL-DBjOpJjFIkJAs_yem0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934491042956-5jf7ivdn5fs0qk8q6qqbjq025qmj68s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

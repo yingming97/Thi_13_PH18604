@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="102dp"
+    android:layout_height="wrap_content">
+
+    <com.loopeer.shadow.ShadowView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:elevation="1dp"
+        app:cornerRadius="10dp"
+        app:shadowColor="#80000000"
+        app:shadowMargin="1dp"
+        app:shadowRadius="1dp">
+
+        <LinearLayout
+            android:layout_width="92dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/tv_chi_tiet"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:text="Chi tiết"
+                android:textColor="#58658C"
+                android:textSize="12sp" />
+
+            <View
+                android:id="@+id/imv_layout_menu_in_list_day__line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#0A000000" />
+
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:text="Sửa"
+                android:textColor="#58658C"
+                android:textSize="12sp" />
+
+            <View
+                android:id="@+id/imv_layout_menu_in_list_day__line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#0A000000" />
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:text="Delete"
+                android:textColor="#F33535"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+    </com.loopeer.shadow.ShadowView>
+</RelativeLayout>

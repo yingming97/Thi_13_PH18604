@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import pham.hien.thi_13_ph18604.Model.Model
 import pham.hien.thi_13_ph18604.R
 import pham.hien.thi_13_ph18604.Utils.ImagesUtils
+import pham.hien.thi_13_ph18604.Utils.gone
+import pham.hien.thi_13_ph18604.Utils.visible
 import pham.hien.thi_13_ph18604.ViewModel.RetrofitViewModel
 import pham.hien.thi_13_ph18604.databinding.ActivityEditModelBinding
 
@@ -43,7 +45,7 @@ class EditModelActivity : AppCompatActivity(), View.OnClickListener {
         binding.edCpu.setText(mModel.cpu)
         binding.edHhdSsd.setText(mModel.hdd_ssd)
         binding.edRam.setText(mModel.ram)
-        binding.edPrice.setText(mModel.price)
+        binding.edPrice.setText(mModel.price.toString())
 
     }
 
@@ -53,6 +55,7 @@ class EditModelActivity : AppCompatActivity(), View.OnClickListener {
                 ImagesUtils().checkPermissionChonAnh(this, binding.imvLaptop)
             }
             binding.btnAddNew -> {
+                binding.pgLoading.visible()
                 validate {
                     if (it) {
                         ImagesUtils().uploadImage(binding.imvLaptop,
@@ -67,6 +70,7 @@ class EditModelActivity : AppCompatActivity(), View.OnClickListener {
                                 )
                             viewModel.add(model) {
                                 Toast.makeText(this, "Update thành công", Toast.LENGTH_LONG).show()
+                                binding.pgLoading.gone()
                             }
                         }
                     }

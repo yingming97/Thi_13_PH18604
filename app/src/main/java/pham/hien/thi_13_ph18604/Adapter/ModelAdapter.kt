@@ -12,12 +12,15 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import pham.hien.thi_13_ph18604.Activity.EditModelActivity
+import pham.hien.thi_13_ph18604.Dialog.DetailDialog
 import pham.hien.thi_13_ph18604.Dialog.XacNhanDialog
 import pham.hien.thi_13_ph18604.Model.Model
 import pham.hien.thi_13_ph18604.R
+import pham.hien.thi_13_ph18604.Utils.moneyFormatter
 import java.util.*
 
-class ModelAdapter(val context: Context) :
+class ModelAdapter(val context: Context, val deleteModel: (Model) -> Unit) :
     RecyclerView.Adapter<ModelAdapter.ViewHolder>() {
 
     private lateinit var mListMoto: List<Model>
@@ -36,15 +39,16 @@ class ModelAdapter(val context: Context) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val moto = mListMoto[position]
-//        holder.tv_name.text = moto.name
-//        holder.tv_gia.text = "Giá : ${moneyFormatter(moto.price)}"
-//        holder.tv_color.text = "Màu : ${moto.color}"
-//        Glide.with(context)
-//            .load(moto.image)
-//            .placeholder(R.drawable.img_default)
-//            .into(holder.imv)
-
+        val model = mListMoto[position]
+        holder.tv_name.text = model.name
+        holder.tv_gia.text = "Giá : ${moneyFormatter(model.price)}"
+        Glide.with(context)
+            .load(model.image)
+            .placeholder(R.drawable.img_default)
+            .into(holder.imv)
+        holder.item_moto.setOnClickListener {
+            showPopupMenu(holder.item_moto, model)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -68,6 +72,7 @@ class ModelAdapter(val context: Context) :
             item_moto = itemView.findViewById(R.id.item_moto)
         }
     }
+
     private fun showPopupMenu(button: View, m: Model) {
         val popupWindow: PopupWindow
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -79,28 +84,23 @@ class ModelAdapter(val context: Context) :
             rootView, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
         popupWindow.showAsDropDown(button)
         tvChiTiet.setOnClickListener {
-//            val intent = Intent(context, BookDetailActivity::class.java)
-//            intent.putExtra("book", b)
-//            context.startActivity(intent)
+            DetailDialog(context, m).show()
             popupWindow.dismiss()
         }
         tvEdit.setOnClickListener {
-//            val intent = Intent(context, BookEditActivity::class.java)
-//            intent.putExtra("book", b)
-//            context.startActivity(intent)
+            val intent = Intent(context, EditModelActivity::class.java)
+            intent.putExtra("model", m)
+            context.startActivity(intent)
             popupWindow.dismiss()
         }
         tvDelete.setOnClickListener {
-//            XacNhanDialog(context, m.linkAnh,
-//                "Bạn muốn xóa \"${b.tenSach}\"",
-//                "Dữ liệu đã xóa không thể khôi phục",
-//                dongY = {
-//                    deleteBook(b)
-//                    popupWindow.dismiss()
-//                },
-//                huy = {
-//                    popupWindow.dismiss()
-//                }).show()
+            XacNhanDialog(context, m.image,
+                "Bạn muốn xóa \"${m.name}\"",
+                "Dữ liệu đã xóa không thể khôi phục",
+                dongY = {
+                    deleteModel(m)
+                }).show()
+            popupWindow.dismiss()
         }
 
 

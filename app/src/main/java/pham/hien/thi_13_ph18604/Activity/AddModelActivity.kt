@@ -1,20 +1,104 @@
 package pham.hien.thi_13_ph18604.Activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import pham.hien.thi_13_ph18604.Model.Model
+import pham.hien.thi_13_ph18604.R
+import pham.hien.thi_13_ph18604.Utils.ImagesUtils
+import pham.hien.thi_13_ph18604.Utils.gone
+import pham.hien.thi_13_ph18604.Utils.visible
+import pham.hien.thi_13_ph18604.ViewModel.RetrofitViewModel
 import pham.hien.thi_13_ph18604.databinding.ActivityAddModelBinding
 
-class AddModelActivity : AppCompatActivity() {
+class AddModelActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityAddModelBinding
+    private lateinit var viewModel: RetrofitViewModel
 
+    private var lastID = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddModelBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setListener()
+        viewModel = ViewModelProvider(this)[RetrofitViewModel::class.java]
+        viewModel.getList()
+        viewModel.mList.observe(this) {
+            if (it.isNotEmpty()) {
+                lastID = it.last().id!!.toInt()
+            }
+        }
     }
 
+    private fun setListener() {
+        binding.imvLaptop.setOnClickListener(this)
+        binding.imvChange.setOnClickListener(this)
+        binding.btnAddNew.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View) {
+        when (v) {
+            binding.imvChange, binding.imvLaptop -> {
+                ImagesUtils().checkPermissionChonAnh(this, binding.imvLaptop)
+            }
+            binding.btnAddNew,
+            -> {
+                binding.pgLoading.visible()
+                validate {
+                    if (it) {
+                        ImagesUtils().uploadImage(binding.imvLaptop,
+                            "Laptop",
+                            (lastID + 1).toString()) { img ->
+                            val model =
+                                Model(binding.edName.text.toString(),
+                                    binding.edCpu.text.toString(),
+                                    binding.edRam.text.toString(),
+                                    binding.edHhdSsd.text.toString(),
+                                    binding.edPrice.text.toString().toInt(),
+                                    img
+                                )
+                            viewModel.add(model) {
+                                binding.edCpu.setText("")
+                                binding.edName.setText("")
+                                binding.edPrice.setText("")
+                                binding.edRam.setText("")
+                                binding.edHhdSsd.setText("")
+                                Glide.with(this)
+                                    .load(R.drawable.img_default)
+                                    .into(binding.imvLaptop)
+                                binding.pgLoading.gone()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun validate(checkDone: (Boolean) -> Unit) {
+        var strError = ""
+        if (binding.edName.text.toString().trim().isEmpty()) {
+            strError += "Chưa nhập tên"
+        } else if (binding.edCpu.text.toString().trim().isEmpty()) {
+            strError += "Nhập CPU"
+        } else if (binding.edRam.text.toString().trim().isEmpty()) {
+            strError += "Nhập Ram"
+        } else if (binding.edHhdSsd.text.toString().trim().isEmpty()) {
+            strError += "Nhập loại"
+        } else if (binding.edPrice.text.toString().toInt() <= 0) {
+            strError += "Giá lớn hơn 0"
+        }
+        if (strError.isEmpty()) {
+            checkDone(true)
+        } else {
+            checkDone(false)
+            Toast.makeText(this, strError, Toast.LENGTH_LONG).show()
+        }
+    }
 }

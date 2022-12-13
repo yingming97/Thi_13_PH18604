@@ -5,21 +5,21 @@ import retrofit2.http.*
 
 interface RetrofitInterface {
 
-    @GET("moto")
+    @GET("laptop_ph18604")
     suspend fun get(): ArrayList<Model>
 
-    @POST("moto")
+    @POST("laptop_ph18604")
     suspend fun add(
         @Body model: Model
     ): Model
 
-    @PUT("moto/{id}")
+    @PUT("laptop_ph18604/{id}")
     suspend fun update(
         @Path("id") id: String,
         @Body model: Model
     ): Model
 
-    @DELETE("moto/{id}")
+    @DELETE("laptop_ph18604/{id}")
     suspend fun delete(
         @Path("id") id: String,
     ): Model

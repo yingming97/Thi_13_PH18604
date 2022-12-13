@@ -3,4 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imv_laptop"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/img_default" />
+
+    <ImageView
+        android:id="@+id/imv_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imv_laptop"
+        android:layout_alignBottom="@+id/imv_laptop"
+        android:src="@drawable/ic_change_image" />
+
+    <EditText
+        android:id="@+id/ed_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imv_laptop"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Name"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/ed_cpu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_name"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="CPU"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/ed_ram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_cpu"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="RAM"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/ed_hhd_ssd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_ram"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="HHD/SSD"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/ed_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_hhd_ssd"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Price"
+        android:inputType="number"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/btn_add_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/bg_btn_blue_rd_5"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:text="ADD"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 </RelativeLayout>

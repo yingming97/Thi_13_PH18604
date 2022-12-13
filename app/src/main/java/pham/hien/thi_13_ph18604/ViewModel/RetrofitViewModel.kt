@@ -10,89 +10,71 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.launch
+import pham.hien.thi_13_ph18604.Api.RetrofitInterface
 import pham.hien.thi_13_ph18604.Model.Model
+import pham.hien.thi_13_ph18604.Utils.Constant
 import pham.hien.thi_13_ph18604.Utils.RetrofitHelper
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitViewModel: ViewModel() {
+class RetrofitViewModel : ViewModel() {
     val mList: MutableLiveData<ArrayList<Model>> = MutableLiveData()
-    private val db = Firebase.firestore
 
     private val api by lazy {
-      Retrofit.Builder()
-            .baseUrl(URL_API)
+        Retrofit.Builder()
+            .baseUrl(Constant.URL.BASE)
             .addConverterFactory(
                 GsonConverterFactory.create(GsonBuilder()
-                .setLenient()
-                .create()))
-            .build().create(RetrofitHelper::class.java)
+                    .setLenient()
+                    .create()))
+            .build().create(RetrofitInterface::class.java)
     }
 
-    fun getList(activity: Activity) {
+    fun getList() {
         viewModelScope.launch {
-            try{
-//                mList.value = api.get()
+            try {
+                mList.value = api.get()
                 Log.d(TAG, mList.toString())
-                Toast.makeText(activity, "List Update", Toast.LENGTH_LONG).show()
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())
             }
         }
     }
 
-    fun add(activity: Activity, mModel: Model) {
+    fun add(mModel: Model, addDone: () -> Unit) {
         viewModelScope.launch {
             try {
-//                api.add(mModel)
-                getList(activity)
-            }catch (e: Exception){
+                api.add(mModel)
+                getList()
+                addDone()
+            } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())
             }
         }
     }
 
-    fun update(activity: Activity, mModel: Model) {
+    fun update( mModel: Model) {
         viewModelScope.launch {
             try {
-//                api.update(mModel.id ,mModel)
-                getList(activity)
-            }catch (e: Exception){
+                mModel.id?.let { api.update(it,mModel) }
+                getList()
+            } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())
             }
         }
     }
 
-    fun delete(activity: Activity, mModel: Model) {
+    fun delete( mModel: Model) {
         viewModelScope.launch {
             try {
-//                api.delete(mModel.id)
-                getList(activity)
-            }catch (e: Exception){
+                mModel.id?.let { api.delete(it) }
+                getList()
+            } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())
             }
         }
     }
 
-//    fun backup(activity: Activity){
-//        val listBackup = mList.value
-//        for (model in listBackup!!){
-//            addModelBackup(model)
-//        }
-//        Toast.makeText(activity, "Backup thành công", Toast.LENGTH_LONG).show()
-//    }
-
-//    private fun addModelBackup(mModel: Model) {
-//        db.collection(TB_NAME)
-//            .document(mModel.id)
-//            .set(mModel)
-//            .addOnSuccessListener {
-//                Log.d(TAG, "Success at ${mModel.id}")
-//            }
-//            .addOnFailureListener {
-//                Log.d(TAG, "Error: ${it.message}")
-//            }
-//    }
 
     companion object {
         const val TAG = "MainViewModel"
